@@ -54,7 +54,7 @@ class AprioriAalgorithm:
         df_ = pd.DataFrame([pd.Series(x) for x in df_.loc[:, self.col_to_group_and_split]])
         df_.columns = ['{}_{}'.format(self.name_cols_split, i) for i in df_.columns]
 
-        return df_.dropna(thresh=self.thresh)  # thresh?
+        return df_.dropna(thresh=self.thresh)  # thresh=2?
 
     def __prep_list_of_tuples(self):
         """
@@ -67,8 +67,6 @@ class AprioriAalgorithm:
         List of tuples 
     
         """
-        # x = self.__group_by_id_and_split_list
-
         transactions = [tuple(row) for row in self.__group_by_id_and_split_list().values.tolist()]
 
         l1 = list()
@@ -107,32 +105,12 @@ class AprioriAalgorithm:
         else:
             print('Put val mode...')
 
-# DEBUG
-# #data = pd.read_csv('C://Users//marcin//Documents//Python Scripts//online_retail.txt')
-# #data = pd.read_excel('online_retail.xlsx') 
-# #data = data.iloc[:, [0, 1]]
-
-
-# data_sc = pd.read_csv('retail_sample.txt') 
-
-# # Dropping the rows without any invoice number 
-# # data.dropna(axis = 0, subset =['InvoiceNo'], inplace = True) 
-# # data['InvoiceNo'] = data['InvoiceNo'].astype('str') 
-
-# # # Dropping all transactions which were done on credit 
-# # data = data[~data['InvoiceNo'].str.contains('C')] 
-
-# # basket_France = data[data['Country'] =="France"] 
-
-# #basket_France.to_csv('retail_sample.txt', index=False)
-
+#DEBUG
+# data_sc = pd.read_csv('C://Users//marcin//Documents//Python Scripts//retail_sample.txt')
 # data = data_sc.iloc[:, [0, 1]].astype(str)
-
-
-# apri = Apriori_algorithm(data,'InvoiceNo','StockCode', 'sku', mode=2)
-
-
+#
+# apri = AprioriAalgorithm(data, 'InvoiceNo', 'StockCode', 'sku', mode=2)
+#
 # print(
 # #alg_apriori(data, mode=2, rule_lhs=1)
-# apri.alg_apriori()
-# )
+# apri.alg_apriori())
